@@ -15,3 +15,10 @@ spec:
 
 ## kubectl apply -f nginx-pod.yaml
 ## kubectl get pods
+## kubectl delete pod nginx-pod
+
+
+## nginx pod 접속하기
+# 1. 컨테이너 내부 접속하기: kubectl exec -it <metadata.name> -- bash => curl 명령어 사용
+# 2. pod와 local Port Forwarding: kubectl port-forward pod/<metadata.name> <local.port>:<pod.port>
+#      참고: 리눅스에선 1024번 이상 포트 사용 권장 (권한 문제 없음)
