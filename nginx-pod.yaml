@@ -1,0 +1,17 @@
+apiVersion: v1                # API 그룹과 버전
+kind: Pod                     # 생성할 리소스 종류
+metadata:
+  name: nginx-pod             # 리소스 이름
+spec:
+  containers:
+    - name: nginx-container   # 컨테이너 이름
+      image: nginx:1.27.1     # 사용할 Docker 이미지
+      ports:
+        - containerPort: 80   # 컨테이너 내부에서 사용할 포트
+
+# 참고
+# - 'apiVersion'과 'kind' 조합이 리소스 타입을 결정 -> kubectl api-resources로 확인 가능
+# - 'containerPort'는 문서화 및 Service 매핑 참고용 (실제 포트 바인딩은 컨테이너 이미지에 따라 자동 처리)
+
+## kubectl apply -f nginx-pod.yaml
+## kubectl get pods
