@@ -15,7 +15,7 @@ spec:
 
 ## kubectl apply -f nginx-pod.yaml
 ## kubectl get pods
-## kubectl delete pod nginx-pod
+## kubectl delete pod nginx-pod(metadata.name)
 
 
 ## nginx pod 접속하기
