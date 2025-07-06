@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: spring-deployment
+
+# Deployment 세부 정보
+spec:
+  replicas: 3                     # 생성할 Pod 수 (동시에 실행되는 복제본 개수)
+  
+  selector:                       # 어떤 라벨을 가진 Pod를 이 Deployment가 관리할지 지정
+    matchLabels:
+      app: backend-app            # app=backend-app 라벨이 있는 Pod만 관리 대상
+  
+
+  template:                       # 생성될 Pod의 템플릿 (이 구조를 기준으로 Pod가 생성)
+    metadata:
+      labels:
+        app: backend-app          # Pod에 부여할 라벨 (selector와 반드시 일치해야 함)
+    spec:
+      containers:
+        - name: spring-container
+          image: spring-server
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: IfNotPresent
