@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: django-deployment
+
+spec:
+  replicas: 3
+
+  selector:
+    matchLabels:
+      app: django-app
+  
+  template:
+    metadata:
+      labels:
+        app: django-app
+    
+    spec:
+      containers:
+        - name: django-container
+          image: django-server:1.1
+          ports:
+            - containerPort: 8000
+          imagePullPolicy: IfNotPresent
+
+
+# template 내부는 Pod YAML 파일과 거의 동일한 구조 (metadata, spec 포함)
