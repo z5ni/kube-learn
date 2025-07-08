@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: spring-deployment
+
+spec:
+  replicas: 3
+
+  selector:
+    matchLabels: 
+      app: backend-app
+  
+  template:
+    metadata:
+      labels:
+        app: backend-app
+    
+    spec:
+      containers:
+        - name: spring-container
+          image: spring-server:1.0
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: MY_ACCOUNT
+              value: account123
+            - name: MY_PASSWORD
+              value: password123
