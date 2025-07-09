@@ -25,6 +25,12 @@ spec:
           imagePullPolicy: IfNotPresent
           env:
             - name: MY_ACCOUNT
-              value: account123
+              valueFrom:
+                configMapKeyRef:
+                  name: spring-config
+                  key: my-account
             - name: MY_PASSWORD
-              value: password123
+              valueFrom:
+                configMapKeyRef:
+                  name: spring-config
+                  key: my-password
