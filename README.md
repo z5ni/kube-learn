@@ -105,3 +105,28 @@ kubectl port-forward pod/<name> 8080:80
 kubectl get svc
 ```
 - View ClusterIP, NodePort, or LoadBalancer addresses
+
+---
+
+### Restart / Recreate Resource
+#### Restart a Deployment (graceful rollout)
+```
+kubectl rollout restart deployment <name>
+```
+- Triggers a rolling restart of all Pods managed by the Deployment
+- No downtime: Pods are recreated one by one
+
+#### Restart a single Pod (force delete)
+```
+kubectl delete pod <name>
+```
+- If managed by a Deployment or ReplicaSet, the Pod will be automatically recreated
+- Useful for restarting a specific Pod without affecting others
+- ⚠️ If not managed by a controller (e.g. standalone Pod), it will **not** be recreated
+
+#### Restart all Pods in a namespace
+```
+kubectl delete pods --all -n <namespace>
+```
+- Deletes all Pods in the namespace; controllers (Deployments, ReplicaSets, etc.) will recreate them
+- ⚠️ Be cautious: this affects **all** Pods, including system Pods if run in `kube-system`
