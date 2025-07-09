@@ -6,4 +6,11 @@ metadata:
 
 data:
   my-account: id123
-  my-password: pw123
+  # my-password: pw123
+
+
+## ConfigMap ##
+# 일반적인 설정값 저장용
+# - 예: 로그 레벨, 외부 API URL 등
+# - 평문(plain text) 저장됨
+# - 민감하지 않은 데이터에 사용
