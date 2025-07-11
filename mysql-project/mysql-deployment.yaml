@@ -33,3 +33,10 @@ spec:
                 configMapKeyRef:
                   name: mysql-config
                   key: mysql-db-name
+          volumeMounts:
+            - name: mysql-persistent-storage      # 아래 volumes에서 정의한 이름과 일치해야 함
+              mountPath: /var/lib/mysql           # MySQL 컨테이너 내부에서 데이터가 저장될 경로
+      volumes:
+        - name: mysql-persistent-storage          # 위 volumeMounts에서 참조한 볼륨 이름
+          persistentVolumeClaim:
+            claimName: mysql-pvc                  # 연결할 PVC 이름. PVC → PV 순으로 자동 연결됨
