@@ -5,7 +5,7 @@ metadata:
   name: mysql-service
 
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: mysql-db
 
@@ -13,4 +13,8 @@ spec:
     - protocol: TCP 
       port: 3306
       targetPort: 3306
-      nodePort: 32206
+
+
+# 보안을 위해 DB 서비스는 외부 노출을 막기 위해 NodePort → ClusterIP로 변경
+# 외부에서 DB에 직접 접근하지 않고, 반드시 내부 서버를 경유해 접근하도록 제한
+# 개발/운영 시 DB 접근이 필요할 경우, kubectl port-forward를 사용해 로컬에서 내부 DB로 안전하게 터널링
