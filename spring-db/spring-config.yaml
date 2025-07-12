@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: spring-config
+
+data:
+  db_host: mysql-service
+  db_port: "3306"
+  db_name: kube-pra

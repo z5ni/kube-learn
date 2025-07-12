@@ -25,12 +25,27 @@ spec:
           imagePullPolicy: IfNotPresent
           env:
             - name: DB_HOST
-              value: mysql-service          # deployment끼리 소통할 때, service로 소통
+              valueFrom:
+                configMapKeyRef:
+                  name: spring-config
+                  key: db_host
             - name: DB_PORT
-              value: "3306"                 # 해당 서비스의 내부 포트
+              valueFrom:
+                configMapKeyRef:
+                  name: spring-config
+                  key: db_port
             - name: DB_NAME
-              value: kube-pra
+              valueFrom:
+                configMapKeyRef:
+                  name: spring-config
+                  key: db_name
             - name: DB_USERNAME
-              value: root
+              valueFrom:
+                secretKeyRef:
+                  name: spring-secret
+                  key: db_username
             - name: DB_PASSWORD
-              value: root123
+              valueFrom:
+                secretKeyRef:
+                  name: spring-secret
+                  key: db_password
