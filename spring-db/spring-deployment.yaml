@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: spring-deployment
+
+spec:
+  replicas: 3
+
+  selector:
+    matchLabels:
+      app: spring-server
+  
+  template:
+    metadata:
+      labels:
+        app: spring-server
+    
+    spec:
+      containers:
+        - name: spring-container
+          image: spring-db
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: DB_HOST
+              value: mysql-service          # deployment끼리 소통할 때, service로 소통
+            - name: DB_PORT
+              value: "3306"                 # 해당 서비스의 내부 포트
+            - name: DB_NAME
+              value: kube-pra
+            - name: DB_USERNAME
+              value: root
+            - name: DB_PASSWORD
+              value: root123
